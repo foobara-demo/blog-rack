@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/foobara-demo/blog.git
+  revision: 1d860a5773cc3a05174e6e337b881e6ee139df83
+  specs:
+    foobara-demo-blog (0.0.1)
+      foobara (>= 0.1.8, < 2.0.0)
+
 PATH
   remote: .
   specs:
@@ -81,6 +88,8 @@ GEM
       foobara-files-generator (< 2.0.0)
     foobara-files-generator (0.1.1)
       foobara (>= 0.1.1, < 2.0.0)
+    foobara-http-command-connector (1.1.1)
+      foobara (>= 0.1.1, < 2.0.0)
     foobara-local-files-crud-driver-generator (0.0.3)
       foobara
       foobara-files-generator
@@ -91,6 +100,10 @@ GEM
     foobara-organization-generator (0.0.2)
       foobara
       foobara-files-generator
+    foobara-rack-connector (0.1.0)
+      foobara (>= 0.1.1, < 2.0.0)
+      foobara-http-command-connector (>= 0.1.0, < 2.0.0)
+      rack
     foobara-rack-connector-generator (0.0.11)
       foobara
       foobara-files-generator
@@ -160,6 +173,7 @@ GEM
     lumberjack (1.4.2)
     method_source (1.1.0)
     nenv (0.3.0)
+    nio4r (2.7.5)
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
@@ -182,7 +196,12 @@ GEM
       date
       stringio
     public_suffix (6.0.2)
+    puma (7.1.0)
+      nio4r (~> 2.0)
     racc (1.8.1)
+    rack (3.2.4)
+    rackup (2.2.1)
+      rack (>= 3)
     rainbow (3.1.1)
     rake (13.3.1)
     rb-fsevent (0.11.2)
@@ -195,6 +214,8 @@ GEM
     regexp_parser (2.11.3)
     reline (0.6.3)
       io-console (~> 0.5)
+    rerun (0.14.0)
+      listen (~> 3.0)
     rexml (3.4.4)
     rspec (3.13.2)
       rspec-core (~> 3.13.0)
@@ -270,15 +291,20 @@ PLATFORMS
 
 DEPENDENCIES
   foob
+  foobara-demo-blog!
   foobara-demo-blog-rack!
   foobara-dotenv-loader (< 2.0.0)
+  foobara-rack-connector
   foobara-rubocop-rules (>= 1.0.0)
   foobara-spec-helpers (< 2.0.0)
   guard-rspec
   irb
   pry
   pry-byebug
+  puma
+  rackup
   rake
+  rerun
   rspec
   rspec-its
   rubocop-rake
@@ -292,4 +318,4 @@ RUBY VERSION
    ruby 3.4.6p54
 
 BUNDLED WITH
-   2.7.2
+   2.7.1
