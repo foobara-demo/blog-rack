@@ -5,6 +5,15 @@ ruby FoobaraDemo::BlogRack::MINIMUM_RUBY_VERSION
 
 gemspec
 
+# gem "foobara-http-command-connector", path: "../../foobara/http-command-connector"
+
+gem "foobara-demo-blog", github: "foobara-demo/blog"
+
+gem "foobara-rack-connector"
+gem "puma"
+gem "rackup"
+gem "rerun"
+
 gem "foobara-dotenv-loader", "< 2.0.0"
 
 gem "rake"
