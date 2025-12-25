@@ -8,6 +8,7 @@ gemspec
 # gem "foobara-http-command-connector", path: "../../foobara/http-command-connector"
 
 gem "foobara-demo-blog", github: "foobara-demo/blog"
+gem "foobara-redis-crud-driver"
 
 gem "foobara-rack-connector"
 gem "puma"
