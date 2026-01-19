@@ -15,6 +15,8 @@ Gem::Specification.new do |spec|
   spec.metadata["source_code_uri"] = spec.homepage
   spec.metadata["changelog_uri"] = "#{spec.homepage}/blob/main/CHANGELOG.md"
 
+  spec.executables += ["blog-cli"]
+
   spec.files = Dir[
     "lib/**/*",
     "src/**/*",
@@ -23,7 +25,7 @@ Gem::Specification.new do |spec|
     "CHANGELOG.md"
   ]
 
-  spec.add_dependency "foobara", ">= 0.0.136", "< 2.0.0"
+  spec.add_dependency "foobara", ">= 0.4.2", "< 2.0.0"
 
   spec.require_paths = ["lib"]
   spec.metadata["rubygems_mfa_required"] = "true"

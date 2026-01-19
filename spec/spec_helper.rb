@@ -5,6 +5,7 @@ require "bundler/setup"
 require "pry"
 require "pry-byebug"
 require "rspec/its"
+require "rack/test"
 
 require_relative "support/simplecov"
 require_relative "../boot/start"

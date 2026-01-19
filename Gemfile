@@ -5,17 +5,20 @@ ruby FoobaraDemo::BlogRack::MINIMUM_RUBY_VERSION
 
 gemspec
 
-# gem "foobara-http-command-connector", path: "../../foobara/http-command-connector"
+gem "foobara", path: "../../foobara/foobara"
+gem "foobara-http-command-connector", path: "../../foobara/http-command-connector"
 
-gem "foobara-demo-blog", github: "foobara-demo/blog"
-gem "foobara-redis-crud-driver"
-
+gem "foobara-auth-http"
+gem "foobara-demo-blog", github: "foobara-demo/blog" # , path: "../blog"
+gem "foobara-demo-blog-auth", github: "foobara-demo/blog-auth" # , path: "../blog"
+gem "foobara-dotenv-loader", "< 2.0.0"
 gem "foobara-rack-connector"
+gem "foobara-redis-crud-driver"
+gem "foobara-sh-cli-connector"
+
 gem "puma"
 gem "rackup"
 gem "rerun"
-
-gem "foobara-dotenv-loader", "< 2.0.0"
 
 gem "rake"
 
@@ -37,6 +40,7 @@ end
 
 group :test do
   gem "foobara-spec-helpers", "< 2.0.0"
+  gem "rack-test"
   gem "rspec"
   gem "rspec-its"
   gem "ruby-prof"
