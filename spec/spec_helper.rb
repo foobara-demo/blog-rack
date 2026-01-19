@@ -17,6 +17,11 @@ RSpec.configure do |config|
   config.order = :defined
   config.expect_with(:rspec) { |c| c.syntax = :expect }
   config.raise_errors_for_deprecations!
+
+  config.before do
+    Foobara::Persistence.reset_all
+    Foobara::Persistence.default_crud_driver = Foobara::Persistence::CrudDrivers::InMemory.new
+  end
 end
 
 Dir["#{__dir__}/support/**/*.rb"].each { |f| require f }

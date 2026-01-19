@@ -5,8 +5,8 @@ ruby FoobaraDemo::BlogRack::MINIMUM_RUBY_VERSION
 
 gemspec
 
-gem "foobara", path: "../../foobara/foobara"
-gem "foobara-http-command-connector", path: "../../foobara/http-command-connector"
+# gem "foobara", path: "../../foobara/foobara"
+# gem "foobara-http-command-connector", path: "../../foobara/http-command-connector"
 
 gem "foobara-auth-http"
 gem "foobara-demo-blog", github: "foobara-demo/blog" # , path: "../blog"

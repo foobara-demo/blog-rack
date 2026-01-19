@@ -4,7 +4,7 @@ require "foobara/auth_http"
 require "foobara_demo/blog_auth"
 
 set_user_to_auth_user = Foobara::CommandConnectors::Http::SetInputToProcResult.for(:user) do
-  authenticated_user.send(:auth_user)
+  authenticated_user
 end
 set_user_to_blog_auth_user = Foobara::CommandConnectors::Http::SetInputToProcResult.for(:user) do
   blog_auth_user
