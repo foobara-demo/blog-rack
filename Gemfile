@@ -6,11 +6,13 @@ ruby FoobaraDemo::BlogRack::MINIMUM_RUBY_VERSION
 gemspec
 
 # gem "foobara", path: "../../foobara/foobara"
+# gem "foobara-auth", path: "../../foobara/auth"
 # gem "foobara-http-command-connector", path: "../../foobara/http-command-connector"
 
-gem "foobara-auth-http"
 gem "foobara-demo-blog", github: "foobara-demo/blog" # , path: "../blog"
 gem "foobara-demo-blog-auth", github: "foobara-demo/blog-auth" # , path: "../blog"
+
+gem "foobara-auth-http"
 gem "foobara-dotenv-loader", "< 2.0.0"
 gem "foobara-rack-connector"
 gem "foobara-redis-crud-driver"
@@ -31,6 +33,7 @@ group :development do
 end
 
 group :development, :test do
+  gem "debug"
   gem "pry"
   gem "pry-byebug"
   # TODO: Just adding this to suppress warnings seemingly coming from pry-byebug. Can probably remove this once

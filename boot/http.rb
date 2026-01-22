@@ -3,13 +3,6 @@ require "foobara/entities_plumbing"
 require "foobara/auth_http"
 require "foobara_demo/blog_auth"
 
-set_user_to_auth_user = Foobara::CommandConnectors::Http::SetInputToProcResult.for(:user) do
-  authenticated_user
-end
-set_user_to_blog_auth_user = Foobara::CommandConnectors::Http::SetInputToProcResult.for(:user) do
-  blog_auth_user
-end
-
 env = ENV["FOOBARA_ENV"]
 secure = env != "development" && env != "test"
 
@@ -23,13 +16,12 @@ connector_class = Foobara::CommandConnectors::Http::Rack
 connector_class.register_allowed_rule :is_article_author, -> { blog_user == article.author }
 connector_class.register_allowed_rule :is_author, -> { blog_user == author }
 
-RACK_CONNECTOR = connector_class.new(
-  authenticator: [:bearer, :api_key],
-  auth_map: {
-    blog_auth_user: FoobaraDemo::BlogAuth::User,
-    blog_user: FoobaraDemo::BlogAuth::FindBlogUserForAuthUser
-  }
-) do
+auth_map = {
+  blog_auth_user: FoobaraDemo::BlogAuth::User,
+  blog_user: FoobaraDemo::BlogAuth::FindBlogUserForAuthUser
+}
+
+RACK_CONNECTOR = connector_class.new(authenticator: [:bearer, :api_key], auth_map:) do
   # TODO: we need a reusable way to reuse allowed rules across connectors
   command FoobaraDemo::Blog::StartNewArticle, allow_if: :is_author
   command FoobaraDemo::Blog::DeleteArticle, allow_if: :is_article_author
@@ -39,13 +31,10 @@ RACK_CONNECTOR = connector_class.new(
   command FoobaraDemo::Blog::UnpublishArticle, allow_if: :is_article_author
 
   command FoobaraDemo::BlogAuth::Register, inputs: { only: [:username, :email, :plaintext_password] }
-
-  # TODO: we should have a shortcut that can just return an auth_mapped value
-  # TODO: don't return a bunch of stuff on the auth user like encrypted secrets
   command FoobaraDemo::BlogAuth::GetCurrentUser,
           :auth,
           :aggregate_entities,
-          request: set_user_to_blog_auth_user
+          request: { set: { user: -> { blog_auth_user } } }
 
   command Foobara::Auth::Login,
           inputs: { only: [:username_or_email, :plaintext_password] },
@@ -57,12 +46,11 @@ RACK_CONNECTOR = connector_class.new(
   command Foobara::Auth::Logout,
           request: Foobara::AuthHttp::SetRefreshTokenFromCookie,
           response: Foobara::AuthHttp::ClearAccessTokenHeader
+  set_user_to_auth_user = { set: { user: -> { authenticated_user } } }
   command Foobara::Auth::CreateApiKey,
           :auth,
           inputs: Foobara::AttributesTransformers.reject(:needs_approval),
           request: set_user_to_auth_user
   command Foobara::Auth::DeleteApiKey, allow_if: -> { authenticated_user.api_keys.include?(token) }
-  command Foobara::Auth::GetApiKeySummaries,
-          :auth,
-          request: set_user_to_auth_user
+  command Foobara::Auth::GetApiKeySummaries, :auth, request: set_user_to_auth_user
 end
