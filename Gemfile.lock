@@ -49,7 +49,6 @@ GEM
     extract-repo (1.0.0)
       foobara (< 2.0.0)
       foobara-sh-cli-connector (< 2.0.0)
-    ffi (1.17.3)
     ffi (1.17.3-aarch64-linux-gnu)
     ffi (1.17.3-aarch64-linux-musl)
     ffi (1.17.3-arm-linux-gnu)
@@ -84,7 +83,7 @@ GEM
       foobara-typescript-react-command-form-generator (< 2.0.0)
       foobara-typescript-remote-command-generator (< 2.0.0)
       foobify-rails-app (< 2.0.0)
-    foobara (0.4.4)
+    foobara (0.5.0)
       bigdecimal
       foobara-lru-cache (< 2.0.0)
       foobara-util (< 2.0.0)
@@ -93,7 +92,7 @@ GEM
       argon2
       foobara (>= 0.1.1, < 2.0.0)
       jwt
-    foobara-auth-http (0.1.0)
+    foobara-auth-http (0.1.1)
       foobara (>= 0.1.1, < 2.0.0)
       foobara-auth (< 2.0.0)
       foobara-http-command-connector (< 2.0.0)
@@ -117,8 +116,10 @@ GEM
       foobara-files-generator (< 2.0.0)
     foobara-files-generator (0.1.1)
       foobara (>= 0.1.1, < 2.0.0)
-    foobara-http-command-connector (1.1.3)
+    foobara-http-command-connector (1.1.4)
       foobara (>= 0.1.1, < 2.0.0)
+    foobara-local-files-crud-driver (0.2.0)
+      foobara (>= 0.2.0, < 2.0.0)
     foobara-local-files-crud-driver-generator (0.0.3)
       foobara
       foobara-files-generator
@@ -129,7 +130,7 @@ GEM
     foobara-organization-generator (0.0.2)
       foobara
       foobara-files-generator
-    foobara-rack-connector (0.1.0)
+    foobara-rack-connector (0.1.1)
       foobara (>= 0.1.1, < 2.0.0)
       foobara-http-command-connector (>= 0.1.0, < 2.0.0)
       rack
@@ -166,10 +167,10 @@ GEM
     foobara-typescript-react-command-form-generator (1.1.1)
       foobara (>= 0.1.1, < 2.0.0)
       foobara-typescript-remote-command-generator (< 2.0.0)
-    foobara-typescript-remote-command-generator (1.2.1)
+    foobara-typescript-remote-command-generator (1.2.5)
       foobara (>= 0.1.16, < 2.0.0)
       foobara-files-generator (< 2.0.0)
-    foobara-util (1.0.7)
+    foobara-util (1.0.8)
     foobify-rails-app (0.0.10)
       foobara (>= 0.3.0, < 2.0.0)
     formatador (1.2.3)
@@ -220,7 +221,7 @@ GEM
     pp (0.6.3)
       prettyprint
     prettyprint (0.2.0)
-    prism (1.8.0)
+    prism (1.9.0)
     pry (0.16.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -251,7 +252,7 @@ GEM
       tsort
     redis (5.4.1)
       redis-client (>= 0.22.0)
-    redis-client (0.26.3)
+    redis-client (0.26.4)
       connection_pool
     regexp_parser (2.11.3)
     reline (0.6.3)
@@ -275,7 +276,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.6)
-    rubocop (1.82.1)
+    rubocop (1.84.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -283,7 +284,7 @@ GEM
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 2.9.3, < 3.0)
-      rubocop-ast (>= 1.48.0, < 2.0)
+      rubocop-ast (>= 1.49.0, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
     rubocop-ast (1.49.0)
@@ -337,6 +338,7 @@ DEPENDENCIES
   foobara-demo-blog-auth!
   foobara-demo-blog-rack!
   foobara-dotenv-loader (< 2.0.0)
+  foobara-local-files-crud-driver
   foobara-rack-connector
   foobara-redis-crud-driver
   foobara-rubocop-rules (>= 1.0.0)
@@ -361,7 +363,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 3.4.6p54
+   ruby 3.4.7p58
 
 BUNDLED WITH
    2.7.1

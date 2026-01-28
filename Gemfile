@@ -12,9 +12,10 @@ gemspec
 gem "foobara-demo-blog", github: "foobara-demo/blog" # , path: "../blog"
 gem "foobara-demo-blog-auth", github: "foobara-demo/blog-auth" # , path: "../blog"
 
-gem "foobara-auth-http"
+gem "foobara-auth-http" # , path: "../../foobara/auth-http"
 gem "foobara-dotenv-loader", "< 2.0.0"
-gem "foobara-rack-connector"
+gem "foobara-local-files-crud-driver" # , path: "../../foobara/local-files-crud-driver"
+gem "foobara-rack-connector" # , path: "../../foobara/rack-connector"
 gem "foobara-redis-crud-driver"
 gem "foobara-sh-cli-connector"
 

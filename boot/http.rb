@@ -30,7 +30,7 @@ RACK_CONNECTOR = connector_class.new(authenticator: [:bearer, :api_key], auth_ma
   command FoobaraDemo::Blog::PublishArticleChanges, allow_if: :is_article_author
   command FoobaraDemo::Blog::UnpublishArticle, allow_if: :is_article_author
 
-  command FoobaraDemo::BlogAuth::Register, inputs: { only: [:username, :email, :plaintext_password] }
+  command FoobaraDemo::BlogAuth::Register
   command FoobaraDemo::BlogAuth::GetCurrentUser,
           :auth,
           :aggregate_entities,
