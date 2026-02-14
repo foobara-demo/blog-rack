@@ -83,7 +83,7 @@ GEM
       foobara-typescript-react-command-form-generator (< 2.0.0)
       foobara-typescript-remote-command-generator (< 2.0.0)
       foobify-rails-app (< 2.0.0)
-    foobara (0.5.2)
+    foobara (0.5.3)
       bigdecimal
       foobara-lru-cache (< 2.0.0)
       foobara-util (< 2.0.0)
