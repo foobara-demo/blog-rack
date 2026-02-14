@@ -18,9 +18,8 @@ auth_map = {
 
 RACK_CONNECTOR = connector_class.new(authenticator: [:bearer, :api_key], auth_map:) do
   # TODO: we need a reusable way to reuse allowed rules across connectors
-  command FoobaraDemo::Blog::StartNewArticle,
-          allow_if: :is_author,
-          request: { default: { author: -> { blog_user } } }
+  command FoobaraDemo::Blog::StartNewArticle, allow_if: :is_author,
+                                              request: { default: { author: -> { blog_user } } }
   command FoobaraDemo::Blog::DeleteArticle, allow_if: :is_article_author
   command FoobaraDemo::Blog::EditArticle, allow_if: :is_article_author
   command FoobaraDemo::Blog::PublishArticle, allow_if: :is_article_author
@@ -29,7 +28,11 @@ RACK_CONNECTOR = connector_class.new(authenticator: [:bearer, :api_key], auth_ma
   command FoobaraDemo::Blog::FindArticles,
           :aggregate_entities,
           request: { default: { author: -> { blog_user } } },
-          allow_if: -> { blog_user == author }
+          allow_if: :is_author
+  command FoobaraDemo::Blog::FindArticleSummaries,
+          :aggregate_entities,
+          request: { default: { author: -> { blog_user } } },
+          allow_if: :is_author
 
   command FoobaraDemo::BlogAuth::Register
   command FoobaraDemo::BlogAuth::GetCurrentUser,
