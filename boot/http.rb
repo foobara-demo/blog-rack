@@ -50,15 +50,12 @@ RACK_CONNECTOR = connector_class.new(authenticator: [:bearer, :api_key], auth_ma
           inputs: Foobara::AttributesTransformers.reject(:needs_approval),
           request: set_user_to_auth_user
   command Foobara::Auth::GetApiKeySummaries, :auth, request: set_user_to_auth_user
-  command Foobara::Auth::Login,
-          inputs: { only: [:username_or_email, :plaintext_password] },
-          response: login_response_mutators
-  command Foobara::Auth::RefreshLogin,
-          request: Foobara::AuthHttp::SetRefreshTokenFromCookie,
-          inputs: { only: :refresh_token },
-          response: login_response_mutators
-  command Foobara::Auth::Logout,
-          request: Foobara::AuthHttp::SetRefreshTokenFromCookie,
-          response: Foobara::AuthHttp::ClearAccessTokenHeader
+  command Foobara::Auth::Login, inputs: { only: [:username_or_email, :plaintext_password] },
+                                response: login_response_mutators
+  command Foobara::Auth::RefreshLogin, request: Foobara::AuthHttp::SetRefreshTokenFromCookie,
+                                       inputs: { only: :refresh_token },
+                                       response: login_response_mutators
+  command Foobara::Auth::Logout, request: Foobara::AuthHttp::SetRefreshTokenFromCookie,
+                                 response: Foobara::AuthHttp::ClearAccessTokenHeader
   command Foobara::Auth::DeleteApiKey, allow_if: -> { authenticated_user.api_keys.include?(token) }
 end
