@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+# doesn't this mean we'll also load http.rb??? We don't want that! Should be opt-in hmmm....
 require_relative "../boot"
 
 require "foobara/sh_cli_connector"
