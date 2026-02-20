@@ -1,18 +1,18 @@
 GIT
   remote: https://github.com/foobara-demo/blog-auth.git
-  revision: ecb88c68a2fc4d6517e409af92730a1f9cc36d65
+  revision: 86e8c1021570fe8d0e53665b57363b4bb700ee2d
   specs:
     foobara-demo-blog-auth (0.0.1)
-      foobara (>= 0.0.136, < 2.0.0)
+      foobara (>= 0.5.6, < 2.0.0)
       foobara-auth (< 2.0.0)
       foobara-demo-blog (< 2.0.0)
 
 GIT
   remote: https://github.com/foobara-demo/blog.git
-  revision: 4cd85fa888135ffe453e654d1ab94305655dcd40
+  revision: 03b8f575e6a20eda3c3824dd15a8d526bd5b8feb
   specs:
     foobara-demo-blog (0.0.1)
-      foobara (>= 0.4.1, < 2.0.0)
+      foobara (>= 0.5.6, < 2.0.0)
 
 PATH
   remote: .
@@ -83,7 +83,7 @@ GEM
       foobara-typescript-react-command-form-generator (< 2.0.0)
       foobara-typescript-remote-command-generator (< 2.0.0)
       foobify-rails-app (< 2.0.0)
-    foobara (0.5.4)
+    foobara (0.5.6)
       bigdecimal
       foobara-lru-cache (< 2.0.0)
       foobara-util (< 2.0.0)
@@ -159,7 +159,7 @@ GEM
     foobara-sh-cli-connector-generator (0.1.0)
       foobara (>= 0.1.1)
       foobara-files-generator (< 2.0.0)
-    foobara-spec-helpers (0.0.4)
+    foobara-spec-helpers (0.1.0)
       foobara-util
     foobara-type-generator (0.0.4)
       foobara
@@ -167,7 +167,7 @@ GEM
     foobara-typescript-react-command-form-generator (1.1.1)
       foobara (>= 0.1.1, < 2.0.0)
       foobara-typescript-remote-command-generator (< 2.0.0)
-    foobara-typescript-remote-command-generator (1.2.6)
+    foobara-typescript-remote-command-generator (1.2.7)
       foobara (>= 0.1.16, < 2.0.0)
       foobara-files-generator (< 2.0.0)
     foobara-util (1.0.8)
@@ -219,7 +219,7 @@ GEM
       shellany (~> 0.0)
     ostruct (0.6.3)
     parallel (1.27.0)
-    parser (3.3.10.1)
+    parser (3.3.10.2)
       ast (~> 2.4.1)
       racc
     pp (0.6.3)
@@ -300,7 +300,7 @@ GEM
     rubocop-rspec (3.9.0)
       lint_roller (~> 1.1)
       rubocop (~> 1.81)
-    ruby-prof (2.0.0)
+    ruby-prof (2.0.2)
       base64
       ostruct
     ruby-progressbar (1.13.0)

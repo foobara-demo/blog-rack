@@ -12,6 +12,7 @@ RACK_CONNECTOR = Foobara::CommandConnectors::Http::Rack.new(
 ) do
   register_allowed_rule :is_article_author, -> { blog_user == article.author }
   register_allowed_rule :is_author, -> { blog_user == author }
+  register_allowed_rule :is_published, -> { article.published? }
 
   # TODO: we need a reusable way to reuse allowed rules across connectors
   command FoobaraDemo::Blog::StartNewArticle, allow_if: :is_author,
@@ -21,6 +22,9 @@ RACK_CONNECTOR = Foobara::CommandConnectors::Http::Rack.new(
   command FoobaraDemo::Blog::PublishArticle, allow_if: :is_article_author
   command FoobaraDemo::Blog::PublishArticleChanges, allow_if: :is_article_author
   command FoobaraDemo::Blog::UnpublishArticle, allow_if: :is_article_author
+  command FoobaraDemo::Blog::FindArticle,
+          :aggregate_entities,
+          allow_if: [:is_article_author, :is_published]
   command FoobaraDemo::Blog::FindArticles,
           :aggregate_entities,
           request: { default: { author: -> { blog_user } } },
