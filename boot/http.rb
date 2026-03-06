@@ -1,43 +1,27 @@
 require "foobara/rack_connector"
 require "foobara/entities_plumbing"
-require "foobara/auth_http"
-require "foobara_demo/blog_auth"
 
-RACK_CONNECTOR = Foobara::CommandConnectors::Http::Rack.new(
-  authenticator: [:bearer, :api_key],
-  auth_map: {
-    blog_auth_user: FoobaraDemo::BlogAuth::User,
-    blog_user: FoobaraDemo::BlogAuth::FindBlogUserForAuthUser
-  }
-) do
-  register_allowed_rule :is_article_author, -> { blog_user == article.author }
-  register_allowed_rule :is_author, -> { blog_user == author }
-  register_allowed_rule :is_published, -> { article.published? }
+authenticator = [:bearer, :api_key]
 
-  # TODO: we need a reusable way to reuse allowed rules across connectors
-  command FoobaraDemo::Blog::StartNewArticle, allow_if: :is_author,
-                                              request: { default: { author: -> { blog_user } } }
-  command FoobaraDemo::Blog::DeleteArticle, allow_if: :is_article_author
-  command FoobaraDemo::Blog::EditArticle, allow_if: :is_article_author
-  command FoobaraDemo::Blog::PublishArticle, allow_if: :is_article_author
-  command FoobaraDemo::Blog::PublishArticleChanges, allow_if: :is_article_author
-  command FoobaraDemo::Blog::UnpublishArticle, allow_if: :is_article_author
-  command FoobaraDemo::Blog::FindArticle,
-          :aggregate_entities,
-          allow_if: [:is_article_author, :is_published]
+RACK_CONNECTOR = Foobara::CommandConnectors::Http::Rack.new(authenticator:, **FoobaraDemo::BlogRack::PERMISSIONS) do
+  command FoobaraDemo::Blog::StartNewArticle, request: { default: { author: -> { blog_user } } }
+  command FoobaraDemo::Blog::DeleteArticle
+  command FoobaraDemo::Blog::EditArticle
+  command FoobaraDemo::Blog::PublishArticle
+  command FoobaraDemo::Blog::PublishArticleChanges
+  command FoobaraDemo::Blog::UnpublishArticle
+  command FoobaraDemo::Blog::FindArticle, :aggregate_entities
   command FoobaraDemo::Blog::FindArticles,
           :aggregate_entities,
-          request: { default: { author: -> { blog_user } } },
-          allow_if: :is_author
+          request: { default: { author: -> { blog_user } } }
   command FoobaraDemo::Blog::FindArticleSummaries,
           :aggregate_entities,
-          request: { default: { author: -> { blog_user } } },
-          allow_if: :is_author
+          request: { default: { author: -> { blog_user } } }
 
   command FoobaraDemo::BlogAuth::Register
   command FoobaraDemo::BlogAuth::GetCurrentUser,
-          :auth,
           :aggregate_entities,
+          allow_if: :always,
           request: { set: { user: -> { blog_auth_user } } }
 
   env = ENV["FOOBARA_ENV"]
@@ -47,16 +31,18 @@ RACK_CONNECTOR = Foobara::CommandConnectors::Http::Rack.new(
   ]
 
   command Foobara::Auth::CreateApiKey,
-          :auth,
           inputs: Foobara::AttributesTransformers.reject(:needs_approval),
-          request: { set: { user: -> { authenticated_user } } }
+          request: { set: { user: -> { authenticated_user } } },
+          allow_if: :always
   command Foobara::Auth::GetApiKeySummaries, :auth, request: { set: { user: -> { authenticated_user } } }
-  command Foobara::Auth::Login, inputs: { only: [:username_or_email, :plaintext_password] },
+  command Foobara::Auth::Login, requires_authentication: false,
+                                inputs: { only: [:username_or_email, :plaintext_password] },
                                 response: login_response_mutators
-  command Foobara::Auth::RefreshLogin, request: Foobara::AuthHttp::SetRefreshTokenFromCookie,
+  command Foobara::Auth::RefreshLogin, requires_authentication: false,
+                                       request: Foobara::AuthHttp::SetRefreshTokenFromCookie,
                                        inputs: { only: :refresh_token },
                                        response: login_response_mutators
   command Foobara::Auth::Logout, request: Foobara::AuthHttp::SetRefreshTokenFromCookie,
                                  response: Foobara::AuthHttp::ClearAccessTokenHeader
-  command Foobara::Auth::DeleteApiKey, allow_if: -> { authenticated_user.api_keys.include?(token) }
+  command Foobara::Auth::DeleteApiKey
 end

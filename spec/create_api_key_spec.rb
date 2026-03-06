@@ -30,6 +30,7 @@ RSpec.describe Foobara::Auth::CreateApiKey do
 
     it "is a 200 and gives an API key" do
       get "/run/CreateApiKey", {}, "HTTP_AUTHORIZATION" => "Bearer #{access_token}"
+
       expect(last_response.status).to be(200)
       result = JSON.parse(last_response.body)
 
