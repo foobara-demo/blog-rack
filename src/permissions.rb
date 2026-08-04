@@ -1,6 +1,6 @@
 module FoobaraDemo
   module BlogRack
-    # :nocov:
+    # simplecov:disable
     PERMISSIONS = {
       auth_map: {
         blog_auth_user: FoobaraDemo::BlogAuth::User,
@@ -26,6 +26,6 @@ module FoobaraDemo
         Foobara::Auth::DeleteApiKey => -> { authenticated_user.api_keys.include?(token) }
       }
     }.freeze
-    # :nocov:
+    # simplecov:enable
   end
 end
