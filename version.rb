@@ -1,6 +1,6 @@
 module FoobaraDemo
   module BlogRack
     VERSION = "0.0.1".freeze
-    MINIMUM_RUBY_VERSION = ">= 3.4.0".freeze
+    MINIMUM_RUBY_VERSION = [">= 3.4.0", "< 4.1"].freeze
   end
 end
